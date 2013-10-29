@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"net/http"
 	"strings"
@@ -15,6 +16,7 @@ func getContent(getUrl string) string {
 }
 
 func main() {
+	fmt.Println("Running nexus-notify...")
 	for {
 		getResult := getContent("https://play.google.com/store/devices?hl=en")
 		possibilities := [2]string{"nexus 5", "nexus5"}

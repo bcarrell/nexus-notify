@@ -1,7 +1,7 @@
 nexus-notify
 ============
 
-This is a Nexus 5 notifier written in Go.  It'll tell you when the Nexus 5 is in the Play Store.
+This is a Nexus 5 notifier written in Go.  It'll email you when the Nexus 5 is in the Play Store.
 
 If you'd like to use this, add a `vars.go` file that looks like this:
 

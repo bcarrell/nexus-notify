@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"os"
 	"strings"
 	"time"
 )
@@ -24,6 +25,7 @@ func main() {
 		for _, possibility := range possibilities {
 			if strings.Contains(getResult, possibility) {
 				sendAlert("https://mandrillapp.com/api/1.0/messages/send.json")
+				os.Exit(0)
 			}
 		}
 		time.Sleep(10 * time.Second)

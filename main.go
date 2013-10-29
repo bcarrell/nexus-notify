@@ -1,40 +1,29 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"net/http"
-	"net/smtp"
-	"os"
 	"strings"
+	"time"
 )
 
-func sendAlert() {
-
-}
-
-func getContent(url string) (string, error) {
-	res, err := http.Get(url)
-	if err != nil {
-		return "", err
-	}
-
+func getContent(getUrl string) string {
+	res, _ := http.Get(getUrl)
 	defer res.Body.Close()
-	contents, err := ioutil.ReadAll(res.Body)
-
-	if err != nil {
-		return "", err
-	}
-
-	return strings.ToLower(string(contents)), nil
+	contents, _ := ioutil.ReadAll(res.Body)
+	return strings.ToLower(string(contents))
 }
 
 func main() {
-	result, err := getContent("https://play.google.com/store/devices?hl=en")
-	if err != nil {
-		fmt.Println("There's a problem.  Exiting.")
-		os.Exit(1)
-	}
+	for {
+		getResult := getContent("https://play.google.com/store/devices?hl=en")
+		possibilities := [3]string{"nexus 5", "nexus5"}
 
-	fmt.Println(strings.Contains(result, "nexus 5"))
+		for _, possibility := range possibilities {
+			if strings.Contains(getResult, possibility) {
+				sendAlert("https://mandrillapp.com/api/1.0/messages/send.json")
+			}
+		}
+		time.Sleep(10 * time.Second)
+	}
 }

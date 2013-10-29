@@ -12,3 +12,5 @@ const (
 	EmailName    string = "destination_name"
 )
 ```
+
+Then `go build` and run the binary as you please.

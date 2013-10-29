@@ -17,7 +17,7 @@ func getContent(getUrl string) string {
 func main() {
 	for {
 		getResult := getContent("https://play.google.com/store/devices?hl=en")
-		possibilities := [3]string{"nexus 5", "nexus5"}
+		possibilities := [2]string{"nexus 5", "nexus5"}
 
 		for _, possibility := range possibilities {
 			if strings.Contains(getResult, possibility) {
